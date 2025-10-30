@@ -37,10 +37,6 @@ A RESTful URL shortener service built with Spring Boot that allows you to create
    mvnw spring-boot:run
    ```
 
-   Or run the JAR file directly:
-   ```cmd
-   java -jar target\url-shortener-0.0.1-SNAPSHOT.jar
-   ```
 
    The application will start on `http://localhost:8080`
 
