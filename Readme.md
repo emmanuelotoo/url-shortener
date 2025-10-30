@@ -2,13 +2,13 @@
 
 A RESTful URL shortener service built with Spring Boot that allows you to create shortened URLs with optional custom aliases and expiry dates. The service tracks analytics like hit counts and last access times.
 
-
 ## How to Run
 
 ### Prerequisites
 
 - Java 21 or higher
 - Maven 3.6+
+- Docker (if using Docker for deployment)
 
 ### Setup
 
@@ -42,7 +42,15 @@ A RESTful URL shortener service built with Spring Boot that allows you to create
    java -jar target\url-shortener-0.0.1-SNAPSHOT.jar
    ```
 
-The application will start on `http://localhost:8080`
+   The application will start on `http://localhost:8080`
+
+6. **(Optional) Deploy with Docker:**
+   Build and run the Docker container:
+   ```cmd
+   docker-compose up --build
+   ```
+
+   The application will be accessible at `http://localhost:8080` or the configured domain.
 
 ## How to Use
 
@@ -109,4 +117,21 @@ http://localhost:8080/mylink
 
 This will redirect (HTTP 302) to the original URL and increment the hit counter.
 
+### Nginx Configuration
 
+If deploying with Nginx, configure the server to route requests to the backend. Example configuration:
+
+```nginx
+server {
+    listen 80;
+    server_name <your-subdomain>.<your-domain>;
+
+    location / {
+        proxy_pass http://localhost:8080;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+    }
+}
+```
+
+Update DNS records to point `<your-subdomain>.<your-domain>` to your server's IP address.
