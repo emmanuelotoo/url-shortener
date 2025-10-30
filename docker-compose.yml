@@ -24,7 +24,7 @@ services:
     container_name: shortener-app
     restart: unless-stopped
     ports:
-      - "80:8080"
+      - "8080:8080"
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/shortener
       SPRING_DATASOURCE_USERNAME: ${DB_USERNAME}
